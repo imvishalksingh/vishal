@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, ShoppingBag, Globe, Briefcase, UtensilsCrossed, Smartphone, Layout, Search, ShieldCheck } from 'lucide-react';
+import { ExternalLink, ShoppingBag, Globe, Briefcase, Layout, Smartphone } from 'lucide-react';
 import ProjectModal from './ProjectModal';
 
 const Projects = () => {
@@ -11,7 +11,7 @@ const Projects = () => {
       title: "Leonardi — Premium E-Commerce",
       description: "A high-end e-commerce platform for a luxury men's accessories brand. Features a sophisticated aesthetic, advanced filtering, and cinematic transitions.",
       detailedDescription: "Leonardi is a premium lifestyle e-commerce application designed for a luxury brand specializing in men's accessories. The project focuses on bridging the gap between luxury aesthetics and high-performance commerce logic. Built with React 18 and Tailwind CSS, it handles complex product hierarchies while maintaining a frictionless user journey.",
-      image: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=500",
+      image: "/leonardi_mockup_1777375232844.png",
       screenshots: [],
       tags: ["React 18", "Tailwind v4", "Framer Motion", "Vite"],
       icon: <Layout className="w-6 h-6" />,
@@ -51,7 +51,7 @@ const Projects = () => {
       title: "Kuddoland — Kids Platform",
       description: "A vibrant child-friendly web platform featuring a playful UI, custom animations, and engaging content for young audiences.",
       detailedDescription: "Kuddoland is a kids-focused web platform designed with a fun, colorful experience. Built with React and Vite, it features custom animations and a playful design language using Baloo 2 & Rubik fonts.",
-      image: "https://images.pexels.com/photos/3862365/pexels-photo-3862365.jpeg?auto=compress&cs=tinysrgb&w=500",
+      image: "/kuddoland_mockup_1777375298381.png",
       screenshots: [],
       tags: ["React", "Vite", "Firebase", "CSS3"],
       icon: <Globe className="w-6 h-6" />,
@@ -72,7 +72,7 @@ const Projects = () => {
       title: "Alpha Busi — Business Services",
       description: "A professional corporate platform with service showcases, lead capture, CRM integration, and automated deployment.",
       detailedDescription: "AlphaBusi is a corporate business services platform featuring integrated lead capture with Bigin/Zoho CRM, reCAPTCHA validation, and a polished corporate web presence.",
-      image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=500",
+      image: "/alphabusi_mockup_v2_1777375501711.png",
       screenshots: [],
       tags: ["React", "Node.js", "CRM Integration", "cPanel"],
       icon: <Briefcase className="w-6 h-6" />,
@@ -93,7 +93,7 @@ const Projects = () => {
       title: "Home Decor E-commerce App",
       description: "A modern Flutter shopping app with category browsing, Firebase auth, real-time Firestore sync, and a seamless checkout flow.",
       detailedDescription: "A comprehensive e-commerce mobile solution featuring a modern UI with smooth animations. Includes real-time inventory, personalized recommendations, and a seamless checkout process.",
-      image: "https://images.pexels.com/photos/6707628/pexels-photo-6707628.jpeg?auto=compress&cs=tinysrgb&w=500",
+      image: "/furnix-vertical (1).webp",
       screenshots: ["/furnix-vertical (1).webp"],
       tags: ["Flutter", "Firebase", "Provider", "Stripe"],
       icon: <ShoppingBag className="w-6 h-6" />,
@@ -115,7 +115,7 @@ const Projects = () => {
       title: "Meal Order MVP",
       description: "A food ordering MVP with menu browsing, cart, and profile features. Built with Flutter for fast user interaction and order sync.",
       detailedDescription: "A streamlined food ordering application designed for quick service restaurants. Focuses on speed and simplicity with real-time order tracking and GPS integration.",
-      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=500",
+      image: "/preview.png",
       screenshots: ["/preview.png"],
       tags: ["Flutter", "Firebase", "Maps API"],
       icon: <Smartphone className="w-6 h-6" />,
