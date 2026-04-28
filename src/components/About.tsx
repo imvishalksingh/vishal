@@ -65,7 +65,7 @@ const About = () => {
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
               My expertise covers the entire development lifecycle. On the mobile side, I excel at **Flutter** and **Android**, 
-              while on the web, I build robust full-stack applications using **React** and **Node.js**. 
+              while on the web, I build robust full-stack applications using **React**, **Node.js**, and **PHP**. 
               I am passionate about creating seamless, high-performance user experiences that drive business results.
             </p>
             

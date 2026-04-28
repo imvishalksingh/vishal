@@ -49,7 +49,7 @@ const Hero = () => {
                 I help startups and businesses turn ideas into high-performance web and mobile applications.
               </p>
               <p>
-                3+ years of experience in React, Node.js, Flutter, and Android development.
+                3+ years of experience in React, Node.js, PHP, Flutter, and Android development.
               </p>
             </div>
             
