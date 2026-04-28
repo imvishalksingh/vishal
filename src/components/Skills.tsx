@@ -26,6 +26,7 @@ const Skills = () => {
       title: "Backend & DevOps",
       skills: [
         { name: "Firebase / Firestore", level: 92 },
+        { name: "PHP", level: 85 },
         { name: "MongoDB / SQL", level: 85 },
         { name: "REST APIs", level: 90 },
         { name: "Git & GitHub", level: 92 },
