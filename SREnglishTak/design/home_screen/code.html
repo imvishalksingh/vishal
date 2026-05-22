@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f5a524",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221b10",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header Section -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 justify-between sticky top-0 z-50 border-b border-primary/10">
+<div class="flex size-10 shrink-0 items-center">
+<div class="bg-primary/20 flex items-center justify-center rounded-full size-10 border border-primary/30">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+</div>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight flex-1 ml-3 font-display italic">ReadIQ</h2>
+<div class="flex items-center gap-4">
+<button class="text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="User profile portrait of a young man" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDr11wzd8buMvNR4mriuWIU841mjwSq7ArdqsYxcCYUGdK6al-abc7TzhSR8uDE0xdrpfU8L_fD9Y-V-iNyjfx_7ebj7yy0x_Q_s1qHjX9EnL0D2d-x5DKN93QxHqSGcX-yMMw31nKYKtz8JjrIyt4OzpzaFwBfIgI_mINteYmYYMV0CArpqK5SsMvLKK_WzcvaaY0QRWMvU9u2XC0C-PDmr0PJgECqfwRRwFspoaSh98w2YYLnn_fshmAOpG3Q0Wf9bKvw6BP9wRs");'></div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Personalized Welcome -->
+<section class="px-4 pt-6 pb-4">
+<h1 class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight font-display mb-2">Good evening, Julian</h1>
+<p class="text-slate-600 dark:text-slate-400 text-base italic font-display border-l-2 border-primary pl-3 py-1">
+                "The more that you read, the more things you will know. The more that you learn, the more places you'll go." — Dr. Seuss
+            </p>
+</section>
+<!-- Quick Stats -->
+<section class="px-4 py-4 grid grid-cols-3 gap-3">
+<div class="bg-primary/10 border border-primary/20 rounded-lg p-3 text-center">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Read</span>
+<p class="text-xl font-bold dark:text-white">24</p>
+</div>
+<div class="bg-primary/10 border border-primary/20 rounded-lg p-3 text-center">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Streak</span>
+<p class="text-xl font-bold dark:text-white">12d</p>
+</div>
+<div class="bg-primary/10 border border-primary/20 rounded-lg p-3 text-center">
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Today</span>
+<p class="text-xl font-bold dark:text-white">45p</p>
+</div>
+</section>
+<!-- Continue Reading Section -->
+<section class="px-4 py-6">
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-slate-900 dark:text-slate-100 text-2xl font-bold font-display">Continue Reading</h2>
+<a class="text-primary text-sm font-semibold" href="#">View Library</a>
+</div>
+<div class="bg-slate-800/40 dark:bg-primary/5 border border-primary/20 rounded-xl overflow-hidden relative">
+<div class="flex p-4 gap-4">
+<div class="w-24 h-36 rounded-lg shadow-xl shrink-0 overflow-hidden border border-white/10">
+<img class="w-full h-full object-cover" data-alt="Classic poetry book cover in dark leather" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClZmpWkx9z0hbKTxEjFdG9BGWvvymAK_bM8C6fqJ9yJGR-umO5VK7nngAXm9z9qjoeB5qeyuMPqUVaLqkO1JI9aXh8e_xT-PwEhE0i_kmYVv6XHrgxfD1jGo1TMdVRaToh5DP7jewjkWz-Qqj38tFbtqFoV6Tl14KgcwAAHwRqpl1FKcdb1_G2J2o8aX97AJPcmgGi_gP2GS9TVV_OC1reIJWDov-PfNHlvWV6zx_Di8GwygwstNdq2sVj5FaomPF2IHoZjxszJwc"/>
+</div>
+<div class="flex flex-col justify-between py-1 flex-1">
+<div>
+<h3 class="text-white text-lg font-bold leading-tight font-display">The Picture of Dorian Gray</h3>
+<p class="text-slate-400 text-sm">Oscar Wilde</p>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs text-slate-300">
+<span>Progress</span>
+<span>68%</span>
+</div>
+<div class="w-full bg-slate-700 rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 68%"></div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-background-dark font-bold py-2 px-4 rounded-lg w-full mt-2 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Resume
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recently Added Horizontal Scroll -->
+<section class="py-6">
+<div class="px-4 mb-4">
+<h2 class="text-slate-900 dark:text-slate-100 text-2xl font-bold font-display">Recently Added</h2>
+</div>
+<div class="flex overflow-x-auto px-4 gap-4 custom-scrollbar">
+<!-- Book Card 1 -->
+<div class="flex-none w-32">
+<div class="w-32 h-48 rounded-lg mb-2 overflow-hidden shadow-lg border border-primary/10">
+<img class="w-full h-full object-cover" data-alt="Dark academic book cover with gold foil" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDWltfPbqJVwHqarUxbUKZUeJJKJYYnFHAShzX16Q4bQBLLM_Te4gVQeY5FtG8MF6EPDyRQXLatRX_XaqkpFIWEOcunhUInpl_hXaNgNybH_okWbzfcIPu4TO1VAh-HNqu4Ed6MhaO7SJT4GUiBSNnwNroDA8px5StMyT3F7CvcvK4-AYHbe-RV5jt2E3QA5BD0y9ufc4aa5dF5evVUZeHWFVx8d1y9emSPnIe77_73m9SGXqyVESHa84lcfV0vhMg_35NFXXOfo8"/>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold truncate font-display leading-tight">Beyond Good and Evil</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">F. Nietzsche</p>
+</div>
+<!-- Book Card 2 -->
+<div class="flex-none w-32">
+<div class="w-32 h-48 rounded-lg mb-2 overflow-hidden shadow-lg border border-primary/10">
+<img class="w-full h-full object-cover" data-alt="Classic literature book cover with vintage texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChEkDKorb42qIA5UXLleBoVNvajbhzVooXy6ekNc52XMZnbBxcsMcY2Pkg9H4ZzTFLeZ96csBbkUuQ5_ouzgJx3S8ldIi8yw8P2H0u3imy7tVFeZPiVKOxqwWwUV-eSHsjZY87Wg49dqAr8dEuTU9LBp8oAylufliowDUGfqNZXgKSCI1XrtY2JnLtBxrAdOIb08nvL7mJnGQfB_U5O3INA3s2Ftj0wcGDjdjL_4h27yPvxh9dqpbwSCtq8A39yh1R8bRHSuLGV4E"/>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold truncate font-display leading-tight">Meditations</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">Marcus Aurelius</p>
+</div>
+<!-- Book Card 3 -->
+<div class="flex-none w-32">
+<div class="w-32 h-48 rounded-lg mb-2 overflow-hidden shadow-lg border border-primary/10">
+<img class="w-full h-full object-cover" data-alt="Scientific and philosophical book cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrHtPCWOVNoyU88167qQ6ulc-fqv84MF66b9EV86egMXOu5E-bzZzagUlDte8sasCESzSq3gpPhnOlHlehzsyfXQ1xLGmyC2lXNgQ3tognXb_fs_qqJjKgv8VTBgdA06dW0GM9DSfA0ItBjqbq1d8WqBBAmHgli2bSW-JbdetE2PK4CaKf6KGinJkzriWeFUZWuCDoYZ1GPInDCHkSZz90nYcEnQHNjNOuLGjYxbZS_djfp0EBlTXD8npwN32KvoZYrSGkbQlfE70"/>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold truncate font-display leading-tight">The Secret History</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">Donna Tartt</p>
+</div>
+<!-- Book Card 4 -->
+<div class="flex-none w-32">
+<div class="w-32 h-48 rounded-lg mb-2 overflow-hidden shadow-lg border border-primary/10">
+<img class="w-full h-full object-cover" data-alt="Ancient Greek philosophy book cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG00zlOr962ezA4H8nbYg_e1QMw66UFcsAiGe3Ged8HOcZMK2qSHARIK68UrzGWB80L0M26kTUESzE6QFVQYd0BPhws0bGZpCDQwsu7wiVTEgthaa6F8L_DHjZrWztIh9mo-p8BCVFzYwmR_5wm_IZAsGmu9bjv7-Oz8eH6X_cD-urQyvWO186rAdLmwZBLkVF7FECWOEg-Dytz16_sHmfuvZrahn-MdSoE1xxTrHUP9YscOVcRJO0B7ovNlvOvunxfDX1uBGB_KI"/>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold truncate font-display leading-tight">The Republic</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">Plato</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light dark:bg-[#1c160e] border-t border-primary/10 px-4 pb-6 pt-2 z-50">
+<div class="flex gap-2 max-w-md mx-auto">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 rounded-full text-primary" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined fill-[1]">home</span>
+</div>
+<p class="text-xs font-bold leading-normal tracking-wide uppercase">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">library_books</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-wide uppercase">Library</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">quiz</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-wide uppercase">Quiz</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-wide uppercase">Profile</p>
+</a>
+</div>
+</nav>
+</body></html>

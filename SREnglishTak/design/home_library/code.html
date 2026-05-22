@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6-72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f5a524",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#1a1610",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined font-bold">menu_book</span>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-primary">ReadIQ</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar with classic academic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIZExKYngl5nKdaw5iKiY6aTCeNE-6XHL1h2U35H0GCNinInGAJ97pRhpCXCfZuSg5VhqlvLpjWL61hbBpJ8ZWzeX-vEM905vKmtxQXKwOiBzexSMi1_f1KrjNPKIrsI2q5i_aEZHdlwuCdbvTivHOiv3V3C3XFXHEvhCo2zUgPA73ZtqprRYBaICz4fM-sSvbS1u1djA1Nxtzt_bRvso8bE24Dn5MYEiO7K2UD8q2enFF7Nz4Ey5Pw6Pe7nJW_GdUMz7npeXHEp8"/>
+</div>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-6 pb-4">
+<label class="relative flex items-center group">
+<span class="material-symbols-outlined absolute left-4 text-primary/60 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-primary/5 border border-primary/20 rounded-xl py-3 pl-12 pr-4 focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all placeholder:text-primary/40 text-slate-100" placeholder="Search books, authors, or PDFs..." type="text"/>
+</label>
+</div>
+</header>
+<main class="pb-32">
+<!-- Continue Reading Section -->
+<section class="mt-6">
+<div class="flex items-center justify-between px-6 mb-4">
+<h2 class="text-xl font-bold text-primary">Continue Reading</h2>
+<button class="text-sm font-medium text-primary/80 hover:text-primary transition-colors">View All</button>
+</div>
+<div class="flex gap-6 overflow-x-auto px-6 hide-scrollbar">
+<!-- Book Card 1 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden shadow-2xl transition-transform duration-300 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="Vintage book cover for History of Rome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVcLp5951TeesrnHSQCRvtAtWUhMe0KenFB81Jk-IYREjTmdMNZmYN5fZp-uh-eyjm9y2i7N5PqA9Hq0DPX9id-Ghiv0yqupOYp6Tk9s9rDYiZS2FjA0HXhc5lcBH_nKgZ1D1z-3mcM-XhNx9FH5vG9jrE28IRhquIG6b9SFIutnTivHTMOFw4K0GHEhKo6ryJW9NBdDfBFqKJsygxhbmekvDVW_xCnJZWg7iZQbCT2K_uxRSJUEjHX0epVdy_9JQuOdJlYhgkDr8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="w-full bg-primary/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[75%] rounded-full shadow-[0_0_8px_rgba(245,165,36,0.6)]"></div>
+</div>
+<p class="text-xs mt-2 text-primary/80 font-medium">75% Completed</p>
+</div>
+</div>
+<h3 class="mt-3 font-bold text-lg leading-snug group-hover:text-primary transition-colors">The History of Ancient Rome</h3>
+<p class="text-sm text-slate-400">Edward Gibbon</p>
+</div>
+<!-- Book Card 2 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden shadow-2xl transition-transform duration-300 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="Classic book cover for The Great Gatsby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdKFTSoYM-p4hVmVYLDwPo-nw4vi0AOVlPv7o6aN61DNfuPN-VBY_98aAO3Urv7NTKpO2CNIDpOKhntERt79Z-Hk_OaxnqdiC-KROeJVgVTpB1zWL7OKxGKhTKlWjZ76mAhGHiqGjHtt2qUNL1YktuHjpgWhTnnEX6LD2iAqneNlAITFDvblPz0frCcIzAa8zjd4Tn5JNenfuGwjfMnmO6-198sHOUBmuFNRyVAYm8FUdVSp-TlCRfS5ZL3q_KYHtvd_bnY_lCLMA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="w-full bg-primary/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[20%] rounded-full shadow-[0_0_8px_rgba(245,165,36,0.6)]"></div>
+</div>
+<p class="text-xs mt-2 text-primary/80 font-medium">20% Completed</p>
+</div>
+</div>
+<h3 class="mt-3 font-bold text-lg leading-snug group-hover:text-primary transition-colors">The Great Gatsby</h3>
+<p class="text-sm text-slate-400">F. Scott Fitzgerald</p>
+</div>
+<!-- Book Card 3 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden shadow-2xl transition-transform duration-300 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="Scientific book cover for Quantum Physics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVcatyVwkYt-yD3gXmuuzEGwypV-XeCeu2ej39lRdbScs0rSNzms4HbIh4-YgBerva3dlJmHWyz8oAs1FesuwNwwFpbEIfAiksFSNWujlwuqnjFVLt5oCpFKBMx_D-LQ5q3wCNwYZw0N5nAgCid4HT8kfdtDse73Z63YqPA7JtkXo0H-j94tgpDgYfbfCyB9TYAv7cyjjJWWmZ1iqakJ3Zuqds8sbJMkbvctI0d2HRo_ZF8urp3D_NJMUHd5c_RDjArLI10O_V25Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="w-full bg-primary/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[45%] rounded-full shadow-[0_0_8px_rgba(245,165,36,0.6)]"></div>
+</div>
+<p class="text-xs mt-2 text-primary/80 font-medium">45% Completed</p>
+</div>
+</div>
+<h3 class="mt-3 font-bold text-lg leading-snug group-hover:text-primary transition-colors">Quantum Mechanics</h3>
+<p class="text-sm text-slate-400">Richard Feynman</p>
+</div>
+</div>
+</section>
+<!-- Library Grid Section -->
+<section class="mt-10 px-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-primary">All Books &amp; PDFs</h2>
+<div class="flex gap-2">
+<button class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+</button>
+<button class="p-2 text-slate-500">
+<span class="material-symbols-outlined text-xl">list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- PDF Card 1 -->
+<div class="bg-primary/5 border border-primary/10 rounded-xl p-3 flex flex-col transition-all hover:bg-primary/10 hover:border-primary/30">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden mb-3">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Research paper PDF thumbnail for Philosophy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgK4OBhRR0zVf9nQJekKbdBtUCDZFsIHx4BZW4OeOrUOFNhQfcHpbuOqwKJ2g7y1vykZ58ev8wVlvZ4UnlbxBPeGlOtFpy7xZNdl26ooY6zL5h1ajCuxPLii5YtnepMyjtkdcdE7kjkvg2ed0y4JSgMl9rtSWPLFyZlKgyVwQ2WsCkH2nTzh0CIBLt-xxR20O4882RVSJDeq_u0a3ERMMUbp7tfIGzCAV8ePthM7G7E-ooBpnkHeautOQBkI3IsiNCa-vLM06KFM8"/>
+<span class="absolute top-2 right-2 bg-red-900/80 text-white text-[10px] font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">PDF</span>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase tracking-wider font-bold text-primary/60 mb-1">Philosophy</p>
+<h4 class="font-bold text-sm leading-tight line-clamp-2 mb-2">Meditations on First Philosophy</h4>
+</div>
+<button class="w-full mt-2 bg-primary text-background-dark font-bold py-2 rounded-lg text-xs hover:bg-primary/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+                        Open
+                    </button>
+</div>
+<!-- PDF Card 2 -->
+<div class="bg-primary/5 border border-primary/10 rounded-xl p-3 flex flex-col transition-all hover:bg-primary/10 hover:border-primary/30">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden mb-3">
+<img class="w-full h-full object-cover opacity-80" data-alt="Classic literature book thumbnail for Pride and Prejudice" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS6K2kfi7LI-XcihkiALz-6yehcfYdAN-xfvd9X6mz21Ucqr5MthFUNMmMiPXhD4MeXgnLKwX_Z8BO0W6rpeTUhbQP6g3-dNHGne-4W0eWfEzdvmxeKpkjSDAY38FyU2rajPudiZlwQe_yeNS9n2uMWWCi99ZJ49G81X-ooJvvrBXpEdStYmWzjiz6ttOLUKW7s6yfx25xnyIWlWF1LwgFuDyQLgm7eqQGmfrEW0L1ePB2xxo0rlgMy1cthGK2FDBKk6-YrOM-IEg"/>
+<span class="absolute top-2 right-2 bg-primary text-background-dark text-[10px] font-bold px-1.5 py-0.5 rounded">EPUB</span>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase tracking-wider font-bold text-primary/60 mb-1">Literature</p>
+<h4 class="font-bold text-sm leading-tight line-clamp-2 mb-2">Pride and Prejudice</h4>
+</div>
+<button class="w-full mt-2 bg-primary text-background-dark font-bold py-2 rounded-lg text-xs hover:bg-primary/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">auto_stories</span>
+                        Read
+                    </button>
+</div>
+<!-- PDF Card 3 -->
+<div class="bg-primary/5 border border-primary/10 rounded-xl p-3 flex flex-col transition-all hover:bg-primary/10 hover:border-primary/30">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden mb-3">
+<img class="w-full h-full object-cover opacity-80" data-alt="Architecture PDF report thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeZ2H7ijnL3R8RXmODgMQ2FI2AjvNtNm2bhy_ypBEgnJH88T5aWvwO7pREjCz1x5Ei_syna8yQV0M7zLl-J4BCbWKRnXpi2o2I5Sk0Xbhgzh4-pY40FfXvCOvLqWucrmQOzzo_sLzeG2yMNWASIFvL8PaXvOQBWWE6Zr9Em6G-OuKHnhGE2GvLUuiQcOdCX4-v1hEE9qPwEVXIZRPUVnD9SBzs-SkKswpog8KGFS9_VQvHKB86mt_DdHGlAIvAnakK2GU_Nz95HYA"/>
+<span class="absolute top-2 right-2 bg-red-900/80 text-white text-[10px] font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">PDF</span>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase tracking-wider font-bold text-primary/60 mb-1">Architecture</p>
+<h4 class="font-bold text-sm leading-tight line-clamp-2 mb-2">Modernism in Urban Design 2024</h4>
+</div>
+<button class="w-full mt-2 bg-primary text-background-dark font-bold py-2 rounded-lg text-xs hover:bg-primary/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+                        Open
+                    </button>
+</div>
+<!-- PDF Card 4 -->
+<div class="bg-primary/5 border border-primary/10 rounded-xl p-3 flex flex-col transition-all hover:bg-primary/10 hover:border-primary/30">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden mb-3">
+<img class="w-full h-full object-cover opacity-80" data-alt="Sociology textbook cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqGs6Vnw1OinDqbPRuxciTVvu37UFw1fb2GvbmcJL9yqK2WSxL8ZFlkDSjUldBQ_1jo6UR5ujGaipWblBUNbVGyfrOln2RZuF57DMnETLV4nv5DiYYbBPpN66f1Bg600u4nVzflzBmi7OgpC-3P47TudgcCJDtrR007iJMvv2l6Lt7CwxLNz4d30HM21lZgH-m_ZmGlu1ZYyUrj3pt5YM1DICkKQMOAVEWHWOOLW9DmVPMH_Iw4BoFN-7uxlga0E-4RzSxoCoCEnQ"/>
+<span class="absolute top-2 right-2 bg-primary text-background-dark text-[10px] font-bold px-1.5 py-0.5 rounded">EPUB</span>
+</div>
+<div class="flex-1">
+<p class="text-[10px] uppercase tracking-wider font-bold text-primary/60 mb-1">Sociology</p>
+<h4 class="font-bold text-sm leading-tight line-clamp-2 mb-2">The Social Contract</h4>
+</div>
+<button class="w-full mt-2 bg-primary text-background-dark font-bold py-2 rounded-lg text-xs hover:bg-primary/90 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">auto_stories</span>
+                        Read
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-dark/95 backdrop-blur-xl border-t border-primary/20 px-6 py-4 z-50">
+<div class="flex justify-between items-center max-w-lg mx-auto">
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">library_books</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Library</span>
+</a>
+<div class="relative -top-8">
+<button class="bg-primary size-14 rounded-full flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background-dark text-background-dark transform active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">quiz</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Quiz</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

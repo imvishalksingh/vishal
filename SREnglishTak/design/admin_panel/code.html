@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReadIQ Admin | Dark Academia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f5a524",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#1a1610", // Darker academia base
+                        "accent-brown": "#3d2b1f",
+                        "panel-dark": "#2a2118",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3d2b1f;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-background-dark">menu_book</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">ReadIQ <span class="text-primary font-light">Admin</span></h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Admin user profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6pNZ_x90IKubiybRyvv9ZwbvEoo2lSls6T7tIPtU1KoHXYtdu-AFMQPmcvoyWCuEeurBlOF-G8RfX_kQ5odaK1xrlvb4i-0PVbRhzSBezZddQ5slKDkD7GUc1ugEwyzQCwL6gdzShFL6IxLrCbAzcL7mO3t5LVEmbmmpSAw-GtESpOF6e38hqZwBWSINNRhItDZN5qgcBSG9Z6KKhIk8pCpuMjHya03zDo6JxT6e2sMhEFVwGEeyiFF0yRuZeDiQqHW0JvKP8ePw"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 w-full max-w-6xl mx-auto p-4 md:p-8 space-y-8 pb-24">
+<!-- Stats Row -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="bg-panel-dark/40 border border-primary/10 rounded-xl p-6 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<p class="text-slate-400 text-sm uppercase tracking-widest">Total Collection</p>
+<span class="material-symbols-outlined text-primary">library_books</span>
+</div>
+<p class="text-3xl font-bold text-slate-100">1,284</p>
+<div class="text-xs text-primary/80 mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+<span>+12 this week</span>
+</div>
+</div>
+<div class="bg-panel-dark/40 border border-primary/10 rounded-xl p-6 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<p class="text-slate-400 text-sm uppercase tracking-widest">Active Readers</p>
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<p class="text-3xl font-bold text-slate-100">8.5k</p>
+<div class="text-xs text-green-500 mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">visibility</span>
+<span>342 currently online</span>
+</div>
+</div>
+<div class="bg-panel-dark/40 border border-primary/10 rounded-xl p-6 flex flex-col gap-2 sm:col-span-2 lg:col-span-1">
+<div class="flex justify-between items-start">
+<p class="text-slate-400 text-sm uppercase tracking-widest">Storage Used</p>
+<span class="material-symbols-outlined text-primary">database</span>
+</div>
+<p class="text-3xl font-bold text-slate-100">72%</p>
+<div class="w-full bg-accent-brown h-1.5 rounded-full mt-3">
+<div class="bg-primary h-full w-[72%] rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Upload & Form Section -->
+<section class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+<!-- Left: Upload Form -->
+<div class="lg:col-span-3 bg-panel-dark border border-primary/20 rounded-xl overflow-hidden shadow-2xl">
+<div class="p-6 border-b border-primary/10 bg-primary/5">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">upload_file</span>
+                        Upload New Manuscript
+                    </h2>
+</div>
+<form class="p-6 space-y-6">
+<!-- Drag & Drop Zone -->
+<div class="border-2 border-dashed border-primary/30 rounded-xl p-8 flex flex-col items-center justify-center bg-accent-brown/20 hover:bg-accent-brown/30 transition-all cursor-pointer group">
+<div class="bg-primary/20 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+</div>
+<p class="text-slate-100 font-medium">Click or drag PDF here to upload</p>
+<p class="text-slate-400 text-sm mt-1">Maximum file size: 50MB</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- File Type -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-300 italic">Format Type</label>
+<select class="w-full bg-accent-brown/40 border-primary/20 rounded-lg text-slate-100 focus:ring-primary focus:border-primary">
+<option>PDF Document</option>
+<option>EPUB E-book</option>
+<option>Manuscript (Docx)</option>
+</select>
+</div>
+<!-- Category -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-300 italic">Category</label>
+<select class="w-full bg-accent-brown/40 border-primary/20 rounded-lg text-slate-100 focus:ring-primary focus:border-primary">
+<option>Classic Literature</option>
+<option>Gothic Fiction</option>
+<option>Philosophy</option>
+<option>Poetry</option>
+<option>History</option>
+</select>
+</div>
+<!-- Title -->
+<div class="md:col-span-2 space-y-2">
+<label class="block text-sm font-medium text-slate-300 italic">Work Title</label>
+<input class="w-full bg-accent-brown/40 border-primary/20 rounded-lg text-slate-100 placeholder:text-slate-500 focus:ring-primary focus:border-primary" placeholder="e.g. The Picture of Dorian Gray" type="text"/>
+</div>
+<!-- Cover Upload -->
+<div class="md:col-span-2 space-y-2">
+<label class="block text-sm font-medium text-slate-300 italic">Cover Art</label>
+<div class="flex items-center gap-4">
+<div class="w-20 h-28 bg-accent-brown/40 border border-primary/20 rounded flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-slate-500">image</span>
+</div>
+<button class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-background-dark transition-all text-sm font-medium" type="button">
+                                    Browse Cover Image
+                                </button>
+<p class="text-xs text-slate-400 italic">Recommended: 1200x1600px JPG</p>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-primary py-3 rounded-lg text-background-dark font-bold hover:brightness-110 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">auto_stories</span>
+                            Publish to Library
+                        </button>
+</div>
+</form>
+</div>
+<!-- Right: Recent Uploads -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="bg-panel-dark border border-primary/20 rounded-xl overflow-hidden shadow-xl flex flex-col h-full">
+<div class="p-6 border-b border-primary/10 flex justify-between items-center">
+<h2 class="text-xl font-bold italic">Recent Archives</h2>
+<a class="text-primary text-sm hover:underline" href="#">View All</a>
+</div>
+<div class="divide-y divide-primary/10 overflow-y-auto custom-scrollbar flex-1">
+<!-- Book Item 1 -->
+<div class="p-4 flex gap-4 hover:bg-primary/5 transition-colors">
+<div class="w-16 h-20 bg-accent-brown rounded overflow-hidden shrink-0 border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Old leather book cover design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUexmfnjGO2Duled4x2nSR_3EIe9U4PzS0RyEZCPnIJ8PX2HGaC4n_KKbF_5GZ4I0ENtn54IIHGhldkkD7Sy7pgzOJZkGka3Dw1Om5AKzm3Du0y4wDWTghDg4giCnowKzVAkKtqEB0R5zxJm9aMphiREPcZHF8qmXAlg7TlueQt9ju4QF1P2adnsDbzy3WnunMBHofoXO4aop8Z4GTHWhdFzTjpN2HGok79MRPCIAnMqBFZuPLduMq_6nT_k3agBEg7MFWPwzcDog"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-slate-100 truncate">The Secret History</h4>
+<p class="text-xs text-slate-400 italic">Classic Fiction • 1.2MB</p>
+<div class="flex items-center gap-4 mt-3">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<div class="ml-auto flex items-center gap-2">
+<span class="text-[10px] uppercase tracking-tighter text-slate-500">Visible</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-7 h-4 bg-accent-brown peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Book Item 2 -->
+<div class="p-4 flex gap-4 hover:bg-primary/5 transition-colors">
+<div class="w-16 h-20 bg-accent-brown rounded overflow-hidden shrink-0 border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Aesthetic book cover with gold lettering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBisl4IC-IK_MS7_1Soc-u0pfD7Y4uDc7f2Bvd86Te-qHvlM5XydqpeyUOIdB3xuf3LCHDCWoMDyTHhBKeUK1-iXpKNZXod3zrV3onfgwmqmsddrxTUsmMkP_JtlGoPN59HGxsLaX7OIpRGJaZJHw2bJcrK9wJr7UGv8Ke8V6NxxCvZ9O99iYBrnpd462ZwA-1hAh-W7mOfRnM31NlVfuecU6WwYlaRWF5_MLoiY30cS-lXmbkQxgEMAGRJpHd8k0zsWNAUla2NXVI"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-slate-100 truncate">Meditations</h4>
+<p class="text-xs text-slate-400 italic">Philosophy • 850KB</p>
+<div class="flex items-center gap-4 mt-3">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<div class="ml-auto flex items-center gap-2">
+<span class="text-[10px] uppercase tracking-tighter text-slate-500">Visible</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-7 h-4 bg-accent-brown peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Book Item 3 -->
+<div class="p-4 flex gap-4 hover:bg-primary/5 transition-colors">
+<div class="w-16 h-20 bg-accent-brown rounded overflow-hidden shrink-0 border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Stacked vintage books background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7t-ZLJfocT6AoIpeFL7laV5XpyRuhLg545PX7vhPLRr-GYIJRnbNnf98MEUmMOy6sLm7Wd6cxwAu142S3d5BghUDs4w0s5l-J62IPCn1SRYwmTS69KpM3TtzQSbK7RxAKncSLhHjMv1PnLOqmwwOqSC8wihrBvg1Yj_5GO3CY_Bg_zaUURKixQyT1EltXNFG-6hvXTJVqgq-QZHHpLrCkJQXTo9amE6cq7t7fBXC9lqAjatoUoTqNCFj6c6lgpaoaCdFTJwLwUhQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-slate-100 truncate">Leaves of Grass</h4>
+<p class="text-xs text-slate-400 italic">Poetry • 2.1MB</p>
+<div class="flex items-center gap-4 mt-3">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+<div class="ml-auto flex items-center gap-2">
+<span class="text-[10px] uppercase tracking-tighter text-slate-500">Visible</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-7 h-4 bg-accent-brown peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-panel-dark border-t border-primary/20 flex justify-around items-center px-4 py-3 md:hidden">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Panel</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="text-[10px] font-medium">Archive</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium">Users</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</nav>
+<!-- Sidebar for Desktop (Alternative layout hint) -->
+<div class="hidden lg:flex fixed left-0 top-0 bottom-0 w-20 bg-panel-dark border-r border-primary/20 flex-col items-center py-8 gap-8">
+<div class="bg-primary/20 p-2 rounded-xl">
+<span class="material-symbols-outlined text-primary">ink_pen</span>
+</div>
+<div class="flex-1 flex flex-col gap-6 items-center">
+<a class="p-3 text-primary bg-primary/10 rounded-xl" href="#">
+<span class="material-symbols-outlined">space_dashboard</span>
+</a>
+<a class="p-3 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+</a>
+<a class="p-3 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+</a>
+<a class="p-3 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+</div>
+<a class="p-3 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+</a>
+</div>
+</body></html>
