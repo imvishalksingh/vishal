@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../providers/auth_provider.dart';
 import '../providers/user_data_provider.dart';
+import '../providers/xp_provider.dart';
 import '../theme/app_theme.dart';
-import '../widgets/animated_scale_button.dart';
+import '../widgets/springy_scale_button.dart';
 import '../widgets/dashboard_header.dart';
+import '../widgets/premium_background.dart';
+import '../widgets/glass_panel.dart';
 import 'quiz_view.dart';
 import 'cbse_dashboard_screen.dart';
 import 'grammar_hub_screen.dart';
@@ -18,18 +23,23 @@ class HomeScreen extends StatefulWidget {
   final VoidCallback? onLibraryTap;
   final VoidCallback? onTestSeriesTap;
   final VoidCallback? onProfileTap;
-  const HomeScreen({super.key, this.onLibraryTap, this.onTestSeriesTap, this.onProfileTap});
+
+  const HomeScreen({
+    super.key,
+    this.onLibraryTap,
+    this.onTestSeriesTap,
+    this.onProfileTap,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   void initState() {
     super.initState();
-    _refreshData();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _refreshData());
   }
 
   Future<void> _refreshData() async {
@@ -41,357 +51,693 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          _buildHeader(context),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 24),
-                    _buildSectionHeader('Live Workshops', () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => LiveWorkshopsScreen(onProfileTap: widget.onProfileTap),
-                        ),
-                      );
-                    }),
-                    const SizedBox(height: 12),
-                    _buildLiveCarousel(),
-                    const SizedBox(height: 32),
-                    _buildSectionHeader('Explore Modules', null),
-                    const SizedBox(height: 16),
-                    _buildFeatureGrid(context),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-              ),
+      backgroundColor: Colors.transparent,
+      body: PremiumBackground(
+        child: Column(
+          children: [
+            DashboardHeader(
+              title: 'Dashboard',
+              onActionPressed: widget.onProfileTap,
+              isDashboard: true,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSectionHeader(String title, VoidCallback? onSeeAll) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: AppTheme.lightTheme.textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: const Color(0xFF1A1A1A),
-            fontSize: 20,
-          ),
-        ),
-        if (onSeeAll != null)
-          TextButton(
-            onPressed: onSeeAll,
-            child: const Text('See All', style: TextStyle(color: Color(0xFF6200EE), fontWeight: FontWeight.bold)),
-          ),
-      ],
-    );
-  }
-
-  Widget _buildLiveCarousel() {
-    final List<Map<String, dynamic>> workshops = [
-      {
-        'title': 'English Grammar Masterclass',
-        'instructor': 'Dr. Sharma',
-        'time': 'LIVE NOW',
-        'colors': [const Color(0xFF6366F1), const Color(0xFFA855F7)],
-        'isLive': true,
-      },
-      {
-        'title': 'Vocabulary Blueprint',
-        'instructor': 'Dr. Sharma',
-        'time': 'TODAY, 6:00 PM',
-        'colors': [const Color(0xFFF59E0B), const Color(0xFFEF4444)],
-        'isLive': false,
-      },
-      {
-        'title': 'Spoken English Secrets',
-        'instructor': 'Dr. Sharma',
-        'time': 'TOMORROW, 4:00 PM',
-        'colors': [const Color(0xFF10B981), const Color(0xFF3B82F6)],
-        'isLive': false,
-      },
-    ];
-
-    return SizedBox(
-      height: 160,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: workshops.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 16),
-        itemBuilder: (context, index) {
-          final ws = workshops[index];
-          final colors = ws['colors'] as List<Color>;
-          final isLive = ws['isLive'] as bool;
-
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ComingSoonScreen(
-                    title: ws['title'] as String,
-                    onProfileTap: widget.onProfileTap,
+            Expanded(
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  // ── Stats Row ─────────────────────────────────────────────
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: _StatsRow(isDark: isDark),
+                    ),
                   ),
-                ),
-              );
-            },
-            child: Container(
-              width: 280,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(
-                  colors: colors,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    right: -20,
-                    bottom: -20,
-                    child: Icon(Icons.bolt, size: 120, color: Colors.white.withOpacity(0.2)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CircleAvatar(
-                                radius: 3,
-                                backgroundColor: isLive ? Colors.red : Colors.white70,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                isLive ? 'LIVE NOW' : (ws['time'] as String),
-                                style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                              ),
-                            ],
+
+                  // ── Live Workshops ────────────────────────────────────────
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 28, 20, 14),
+                      child: _SectionLabel(
+                        label: 'Live Workshops',
+                        onSeeAll: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => LiveWorkshopsScreen(
+                              onProfileTap: widget.onProfileTap,
+                            ),
                           ),
                         ),
-                        const Spacer(),
-                        Text(
-                          ws['title'] as String,
-                          style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'with ${ws['instructor']}',
-                          style: const TextStyle(color: Colors.white70, fontSize: 13),
-                        ),
-                      ],
+                        isDark: isDark,
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: _WorkshopCarousel(
+                      onProfileTap: widget.onProfileTap,
+                      isDark: isDark,
+                    ),
+                  ),
+
+                  // ── Explore Modules ───────────────────────────────────────
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 32, 20, 16),
+                      child: _SectionLabel(
+                        label: 'Explore Modules',
+                        isDark: isDark,
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 140),
+                    sliver: _ModuleList(
+                      isDark: isDark,
+                      onLibraryTap: widget.onLibraryTap,
+                      onTestSeriesTap: widget.onTestSeriesTap,
+                      onProfileTap: widget.onProfileTap,
                     ),
                   ),
                 ],
               ),
             ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    return DashboardHeader(
-      title: 'Home',
-      onActionPressed: widget.onProfileTap,
-    );
-  }
-
-  Widget _buildFeatureGrid(BuildContext context) {
-    return Column(
-      children: [
-        _buildFeatureRow(context, [
-          _FeatureData(
-            'Free Test\nPackage',
-            Icons.assignment_turned_in_rounded,
-            [const Color(0xFF1E3A8A), const Color(0xFF3B82F6)],
-            () => widget.onTestSeriesTap?.call(),
-          ),
-          _FeatureData(
-            'Practice\nArena',
-            Icons.sports_esports_rounded,
-            [const Color(0xFF0F172A), const Color(0xFF334155)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => ArenaScreen())),
-          ),
-        ]),
-        const SizedBox(height: 16),
-        _buildFeatureRow(context, [
-          _FeatureData(
-            'CBSE\nBoard',
-            Icons.school_rounded,
-            [const Color(0xFF1E3A8A), const Color(0xFF3B82F6)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => CbseDashboardScreen(onProfileTap: widget.onProfileTap))),
-          ),
-          _FeatureData(
-            'Daily\nQuiz',
-            Icons.lightbulb_rounded,
-            [const Color(0xFF4C1D95), const Color(0xFF8B5CF6)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => const QuizView())),
-          ),
-        ]),
-        const SizedBox(height: 16),
-        _buildFeatureRow(context, [
-          _FeatureData(
-            'Grammar\nHub',
-            Icons.translate_rounded,
-            [const Color(0xFF064E3B), const Color(0xFF10B981)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => GrammarHubScreen(onProfileTap: widget.onProfileTap))),
-          ),
-          _FeatureData(
-            'Vocabulary\nBuilder',
-            Icons.spellcheck_rounded,
-            [const Color(0xFF7F1D1D), const Color(0xFFEF4444)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => VocabularyScreen(onProfileTap: widget.onProfileTap))),
-          ),
-        ]),
-        const SizedBox(height: 16),
-        _buildFeatureRow(context, [
-          _FeatureData(
-            'Daily\nTips',
-            Icons.tips_and_updates_rounded,
-            [const Color(0xFF78350F), const Color(0xFFF59E0B)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => DailyTipsScreen(onProfileTap: widget.onProfileTap))),
-          ),
-          _FeatureData(
-            'Free\nE-Books',
-            Icons.auto_stories_rounded,
-            [const Color(0xFF374151), const Color(0xFF6B7280)],
-            () => widget.onLibraryTap?.call(),
-          ),
-        ]),
-        const SizedBox(height: 16),
-        _buildFeatureRow(context, [
-          _FeatureData(
-            'Previous\nPapers',
-            Icons.description_rounded,
-            [const Color(0xFF1F2937), const Color(0xFF4B5563)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => ComingSoonScreen(title: 'Previous Papers', onProfileTap: widget.onProfileTap))),
-          ),
-          _FeatureData(
-            'Community\nGroups',
-            Icons.groups_rounded,
-            [const Color(0xFF4B2C20), const Color(0xFF8D6E63)],
-            () => Navigator.push(context, MaterialPageRoute(builder: (_) => ComingSoonScreen(title: 'Community', onProfileTap: widget.onProfileTap))),
-          ),
-        ]),
-        const SizedBox(height: 100),
-      ],
-    );
-  }
-
-  Widget _buildFeatureRow(BuildContext context, List<_FeatureData> features) {
-    return Row(
-      children: features.map((f) => Expanded(
-        child: Padding(
-          padding: EdgeInsets.only(right: features.indexOf(f) == features.length - 1 ? 0 : 16),
-          child: _buildFeatureCard(context, f.title, f.icon, f.gradientColors, f.onTap),
-        ),
-      )).toList(),
-    );
-  }
-
-  Widget _buildFeatureCard(
-    BuildContext context,
-    String title,
-    IconData icon,
-    List<Color> gradientColors,
-    VoidCallback onTap,
-  ) {
-    return AnimatedScaleButton(
-      onTap: onTap,
-      child: Container(
-        height: 160,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: gradientColors,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: gradientColors[1].withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
-            ),
           ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: Stack(
-            children: [
-              Positioned(
-                right: -20,
-                bottom: -20,
-                child: Icon(
-                  icon,
-                  size: 110,
-                  color: Colors.white.withOpacity(0.12),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(icon, color: Colors.white, size: 24),
-                    ),
-                    const Spacer(),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        height: 1.2,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
   }
 }
 
-class _FeatureData {
-  final String title;
+// ─────────────────────────────────────────────────────────────────────────────
+// Stats Row — Streak · XP · Level
+// ─────────────────────────────────────────────────────────────────────────────
+class _StatsRow extends StatelessWidget {
+  final bool isDark;
+  const _StatsRow({required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    final xpProvider = context.watch<XpProvider>();
+    final userData = context.watch<UserDataProvider>();
+    final xp = xpProvider.totalXp;
+    final streak = userData.achievements?.summary.currentStreak ?? 0;
+    final level = xpProvider.level + 1;
+
+    return GlassPanel(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      borderRadius: BorderRadius.circular(20),
+      child: Row(
+        children: [
+          _StatChip(
+            icon: Icons.local_fire_department_rounded,
+            value: '$streak',
+            label: 'Day Streak',
+            color: AppTheme.amber,
+            isDark: isDark,
+          ),
+          _VerticalDivider(isDark: isDark),
+          _StatChip(
+            icon: Icons.diamond_rounded,
+            value: '$xp',
+            label: 'Total XP',
+            color: AppTheme.primary,
+            isDark: isDark,
+          ),
+          _VerticalDivider(isDark: isDark),
+          _StatChip(
+            icon: Icons.military_tech_rounded,
+            value: 'Lv. $level',
+            label: 'Your Level',
+            color: AppTheme.accent2,
+            isDark: isDark,
+          ),
+        ],
+      ),
+    )
+        .animate()
+        .fadeIn(duration: 400.ms)
+        .slideY(begin: 0.12, duration: 400.ms, curve: Curves.easeOutCubic);
+  }
+}
+
+class _StatChip extends StatelessWidget {
   final IconData icon;
-  final List<Color> gradientColors;
+  final String value;
+  final String label;
+  final Color color;
+  final bool isDark;
+
+  const _StatChip({
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.color,
+    required this.isDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: color, size: 18),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            value,
+            style: GoogleFonts.outfit(
+              color: isDark ? Colors.white : AppTheme.textDark,
+              fontSize: 16,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Text(
+            label,
+            style: GoogleFonts.inter(
+              color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _VerticalDivider extends StatelessWidget {
+  final bool isDark;
+  const _VerticalDivider({required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 1,
+      height: 40,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      color: isDark
+          ? Colors.white.withValues(alpha: 0.08)
+          : Colors.black.withValues(alpha: 0.06),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Section Label
+// ─────────────────────────────────────────────────────────────────────────────
+class _SectionLabel extends StatelessWidget {
+  final String label;
+  final VoidCallback? onSeeAll;
+  final bool isDark;
+
+  const _SectionLabel({required this.label, this.onSeeAll, required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.outfit(
+            color: isDark ? Colors.white : AppTheme.textDark,
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.3,
+          ),
+        ),
+        if (onSeeAll != null)
+          GestureDetector(
+            onTap: onSeeAll,
+            child: Text(
+              'See all →',
+              style: GoogleFonts.inter(
+                color: AppTheme.primary,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Workshop Carousel
+// ─────────────────────────────────────────────────────────────────────────────
+class _WorkshopCarousel extends StatefulWidget {
+  final VoidCallback? onProfileTap;
+  final bool isDark;
+
+  const _WorkshopCarousel({required this.onProfileTap, required this.isDark});
+
+  @override
+  State<_WorkshopCarousel> createState() => _WorkshopCarouselState();
+}
+
+class _WorkshopCarouselState extends State<_WorkshopCarousel> {
+  final PageController _pc = PageController(viewportFraction: 0.88);
+  int _page = 0;
+
+  final List<Map<String, dynamic>> _workshops = const [
+    {
+      'title': 'English Grammar\nMasterclass',
+      'instructor': 'Dr. Sharma',
+      'time': 'LIVE NOW',
+      'isLive': true,
+      'accent': Color(0xFF6366F1),
+      'icon': Icons.menu_book_rounded,
+    },
+    {
+      'title': 'Vocabulary\nBlueprint',
+      'instructor': 'Dr. Sharma',
+      'time': 'TODAY · 6:00 PM',
+      'isLive': false,
+      'accent': Color(0xFFF59E0B),
+      'icon': Icons.spellcheck_rounded,
+    },
+    {
+      'title': 'Spoken English\nSecrets',
+      'instructor': 'Dr. Sharma',
+      'time': 'TOMORROW · 4:00 PM',
+      'isLive': false,
+      'accent': Color(0xFF10B981),
+      'icon': Icons.record_voice_over_rounded,
+    },
+  ];
+
+  @override
+  void dispose() {
+    _pc.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 160,
+          child: PageView.builder(
+            controller: _pc,
+            itemCount: _workshops.length,
+            onPageChanged: (i) => setState(() => _page = i),
+            itemBuilder: (ctx, i) {
+              final ws = _workshops[i];
+              final accent = ws['accent'] as Color;
+              final isLive = ws['isLive'] as bool;
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: SpringyScaleButton(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ComingSoonScreen(
+                        title: (ws['title'] as String).replaceAll('\n', ' '),
+                        onProfileTap: widget.onProfileTap,
+                      ),
+                    ),
+                  ),
+                  child: GlassPanel(
+                    padding: EdgeInsets.zero,
+                    borderRadius: BorderRadius.circular(24),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        gradient: LinearGradient(
+                          colors: [
+                            accent.withValues(alpha: widget.isDark ? 0.18 : 0.08),
+                            accent.withValues(alpha: 0.01),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Status badge
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: isLive
+                                          ? AppTheme.accent3.withValues(alpha: 0.12)
+                                          : accent.withValues(alpha: 0.10),
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: isLive
+                                            ? AppTheme.accent3.withValues(alpha: 0.30)
+                                            : accent.withValues(alpha: 0.20),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (isLive) ...[
+                                          Container(
+                                            width: 6,
+                                            height: 6,
+                                            decoration: const BoxDecoration(
+                                              color: AppTheme.accent3,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                        ],
+                                        Text(
+                                          ws['time'] as String,
+                                          style: GoogleFonts.inter(
+                                            color: isLive
+                                                ? AppTheme.accent3
+                                                : accent,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w700,
+                                            letterSpacing: 0.3,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    ws['title'] as String,
+                                    style: GoogleFonts.outfit(
+                                      color: widget.isDark
+                                          ? Colors.white
+                                          : AppTheme.textDark,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w800,
+                                      height: 1.15,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'with ${ws['instructor']}',
+                                    style: GoogleFonts.inter(
+                                      color: widget.isDark
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade600,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Container(
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: accent.withValues(alpha: 0.12),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: accent.withValues(alpha: 0.20),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Icon(
+                                ws['icon'] as IconData,
+                                color: accent,
+                                size: 26,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 12),
+        // Page dots
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(_workshops.length, (i) {
+            final active = i == _page;
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              margin: const EdgeInsets.symmetric(horizontal: 3),
+              width: active ? 20 : 6,
+              height: 6,
+              decoration: BoxDecoration(
+                color: active
+                    ? AppTheme.primary
+                    : (widget.isDark
+                        ? Colors.white.withValues(alpha: 0.25)
+                        : Colors.black.withValues(alpha: 0.15)),
+                borderRadius: BorderRadius.circular(3),
+              ),
+            );
+          }),
+        ),
+      ],
+    )
+        .animate()
+        .fadeIn(delay: 100.ms, duration: 400.ms)
+        .slideY(begin: 0.10, duration: 400.ms, curve: Curves.easeOutCubic);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Module List (replaces cramped 2-col grid)
+// ─────────────────────────────────────────────────────────────────────────────
+class _ModuleList extends StatelessWidget {
+  final bool isDark;
+  final VoidCallback? onLibraryTap;
+  final VoidCallback? onTestSeriesTap;
+  final VoidCallback? onProfileTap;
+
+  const _ModuleList({
+    required this.isDark,
+    this.onLibraryTap,
+    this.onTestSeriesTap,
+    this.onProfileTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final modules = _buildModules(context);
+
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (ctx, i) => Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: modules[i]
+              .animate()
+              .fadeIn(delay: (80 + i * 55).ms, duration: 350.ms)
+              .slideY(begin: 0.08, duration: 350.ms, curve: Curves.easeOutCubic),
+        ),
+        childCount: modules.length,
+      ),
+    );
+  }
+
+  List<Widget> _buildModules(BuildContext context) {
+    return [
+      _ModuleCard(
+        title: 'Free Test Package',
+        description: 'Practice papers, mock tests and previous year questions',
+        icon: Icons.assignment_turned_in_outlined,
+        color: AppTheme.primary,
+        isDark: isDark,
+        onTap: () => onTestSeriesTap?.call(),
+      ),
+      _ModuleCard(
+        title: 'Grammar Hub',
+        description: 'Master tenses, articles, prepositions and sentence structure',
+        icon: Icons.translate_rounded,
+        color: AppTheme.accent2,
+        isDark: isDark,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) =>
+                GrammarHubScreen(onProfileTap: onProfileTap),
+          ),
+        ),
+      ),
+      _ModuleCard(
+        title: 'Vocabulary Builder',
+        description: 'Expand your word power with meanings, examples and usage',
+        icon: Icons.spellcheck_rounded,
+        color: AppTheme.accent3,
+        isDark: isDark,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) =>
+                VocabularyScreen(onProfileTap: onProfileTap),
+          ),
+        ),
+      ),
+      _ModuleCard(
+        title: 'CBSE Board Prep',
+        description: 'Chapter-wise study material and resources for board exams',
+        icon: Icons.school_outlined,
+        color: const Color(0xFF3B82F6),
+        isDark: isDark,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CbseDashboardScreen(onProfileTap: onProfileTap),
+          ),
+        ),
+      ),
+      _ModuleCard(
+        title: 'Daily Quiz',
+        description: 'Test your knowledge with fresh questions every day',
+        icon: Icons.lightbulb_outline_rounded,
+        color: const Color(0xFF8B5CF6),
+        isDark: isDark,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const QuizView()),
+        ),
+      ),
+      _ModuleCard(
+        title: 'Daily Tips',
+        description: 'Quick grammar and vocabulary tips to read each morning',
+        icon: Icons.tips_and_updates_outlined,
+        color: AppTheme.amber,
+        isDark: isDark,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) =>
+                DailyTipsScreen(onProfileTap: onProfileTap),
+          ),
+        ),
+      ),
+      _ModuleCard(
+        title: 'Free E-Books',
+        description: 'Curated English books, novels and reading materials',
+        icon: Icons.auto_stories_outlined,
+        color: const Color(0xFF6B7280),
+        isDark: isDark,
+        onTap: () => onLibraryTap?.call(),
+      ),
+      _ModuleCard(
+        title: 'Previous Papers',
+        description: 'Solved question papers from past board examinations',
+        icon: Icons.description_outlined,
+        color: const Color(0xFF374151),
+        isDark: isDark,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ComingSoonScreen(
+              title: 'Previous Papers',
+              onProfileTap: onProfileTap,
+            ),
+          ),
+        ),
+      ),
+    ];
+  }
+}
+
+class _ModuleCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final IconData icon;
+  final Color color;
+  final bool isDark;
   final VoidCallback onTap;
 
-  _FeatureData(this.title, this.icon, this.gradientColors, this.onTap);
+  const _ModuleCard({
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.color,
+    required this.isDark,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SpringyScaleButton(
+      onTap: onTap,
+      child: GlassPanel(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        borderRadius: BorderRadius.circular(20),
+        child: Row(
+          children: [
+            // Icon container
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: isDark ? 0.15 : 0.10),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: color.withValues(alpha: isDark ? 0.25 : 0.15),
+                  width: 1,
+                ),
+              ),
+              child: Icon(icon, color: color, size: 24),
+            ),
+            const SizedBox(width: 16),
+            // Text block
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.outfit(
+                      color: isDark ? Colors.white : AppTheme.textDark,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.2,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    description,
+                    style: GoogleFonts.inter(
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
+                      fontSize: 12,
+                      height: 1.4,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            // Arrow
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 14,
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.30)
+                  : Colors.black.withValues(alpha: 0.25),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
