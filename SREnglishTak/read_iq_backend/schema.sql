@@ -357,3 +357,24 @@ CREATE POLICY "Public CBSE materials are viewable by everyone" ON cbse_materials
 CREATE POLICY "Admins can manage CBSE materials" ON cbse_materials USING (
   EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
 );
+
+-- ==========================================
+-- Module Interests (Coming Soon Notifications)
+-- ==========================================
+CREATE TABLE module_interests (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  module_title TEXT NOT NULL,
+  is_notified BOOLEAN DEFAULT FALSE,
+  is_excited BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, module_title)
+);
+
+ALTER TABLE module_interests ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Module interests viewable by everyone" ON module_interests FOR SELECT USING (true);
+CREATE POLICY "Users can manage own module interests" ON module_interests FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Admins can manage module interests" ON module_interests USING (
+  EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
+);

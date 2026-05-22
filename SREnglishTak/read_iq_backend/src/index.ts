@@ -20,6 +20,7 @@ import tipsRoutes from './routes/tipsRoutes.js';
 import challengeRoutes from './routes/challengeRoutes.js';
 import grammarRoutes from './routes/grammarRoutes.js';
 import cbseRoutes from './routes/cbseRoutes.js';
+import interestRoutes from './routes/interestRoutes.js';
 
 dotenv.config();
 
@@ -126,6 +127,7 @@ app.use('/api/challenges', challengeRoutes);
 app.use('/api/grammar', grammarRoutes);
 app.use('/api/cbse', cbseRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/interests', interestRoutes);
 
 // ─── Global Error Handler ────────────────────────────────────────────────────
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
